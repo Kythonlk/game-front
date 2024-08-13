@@ -1,12 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('game-canvas');
     const ctx = canvas.getContext('2d');
-    const startButton = document.getElementById('start-game');
-    const pauseButton = document.getElementById('pause-game');
-    const resetButton = document.getElementById('reset-game');
     const statusElement = document.getElementById('status');
-    const objectiveElement = document.getElementById('objective');
-    const messageTextElement = document.getElementById('message-text');
 
     const cellSize = 20;
     const canvasWidth = 400;
@@ -16,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let gameInterval;
     let startTime;
     let timerInterval;
-    const timeLimit = 30; // Time limit in seconds
+    const timeLimit = 30;
     let goalPosition = { x: 0, y: 0 };
     let level = 1;
     let shiftInterval;
@@ -56,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function stopTimer() {
         clearInterval(timerInterval);
         timerInterval = null;
-        clearInterval(shiftInterval); // Stop shifting when timer stops
+        clearInterval(shiftInterval); 
     }
 
     function startLevelShift() {
@@ -66,22 +61,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 drawMaze(maze);
                 drawPlayer();
             }
-        }, 3000); // Shift every 3 seconds
+        }, 3000); 
     }
 
     function shiftMaze() {
-        // Shift the maze to a new level
-        maze = generateMaze(20, 20); // Adjust maze size and complexity if needed
+        maze = generateMaze(20, 20); 
         generateGoalPosition();
-        playerPosition = { x: 1, y: 1 }; // Reset player position
+        playerPosition = { x: 1, y: 1 }; 
     }
 
     function endGame(win) {
         if (win) {
             alert('Congratulations! You reached the goal!');
-            level += 1; // Increase level
-            shiftMaze(); // Prepare next level
-            startGame(); // Restart the game with new level
+            level += 1; 
+            shiftMaze(); 
+            startGame(); 
         } else {
             alert('Time\'s up! You did not reach the goal in time.');
         }
@@ -94,13 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('pause-game').addEventListener('click', () => {
         clearInterval(gameInterval);
         gameInterval = null;
-        stopTimer(); // Stop timer and shifting when paused
+        stopTimer();
     });
 
     document.getElementById('reset-game').addEventListener('click', () => {
         clearInterval(gameInterval);
         gameInterval = null;
-        stopTimer(); // Stop timer and shifting when reset
+        stopTimer();
         maze = generateMaze(20, 20);
         playerPosition = { x: 1, y: 1 };
         generateGoalPosition();
